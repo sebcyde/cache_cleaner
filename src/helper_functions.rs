@@ -56,7 +56,6 @@ pub mod helpers {
         }
 
         let config_value: &str = &read_to_string(config_path).unwrap();
-        println!("config_value: {}", config_value);
 
         let escaped_config_value = config_value.replace("\\", "\\\\");
 

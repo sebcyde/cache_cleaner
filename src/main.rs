@@ -1,6 +1,7 @@
 mod helper_functions;
 
 use crate::helper_functions::helpers::{read_config, ConfigInterface};
+use std::process;
 use std::{path::Path, thread};
 
 fn main() {
@@ -13,8 +14,7 @@ fn main() {
             println!("No Flight Club cache directory set. Skipping");
         } else {
             println!("Removing Flight Club Cache.");
-            std::fs::remove_dir_all(Path::new(user_config.flight_club.as_str().unwrap()))
-                .expect("Failed to delete FC cache");
+            _ = std::fs::remove_dir_all(Path::new(user_config.flight_club.as_str().unwrap()))
         }
     });
 
@@ -23,8 +23,7 @@ fn main() {
             println!("No Electric Shuffle cache directory set. Skipping");
         } else {
             println!("Removing Electric Shuffle Cache.");
-            std::fs::remove_dir_all(Path::new(user_config.electric_shuffle.as_str().unwrap()))
-                .expect("Failed to delete ES cache");
+            _ = std::fs::remove_dir_all(Path::new(user_config.electric_shuffle.as_str().unwrap()))
         }
     });
 
@@ -33,8 +32,7 @@ fn main() {
             println!("No Red Engine cache directory set. Skipping");
         } else {
             println!("Removing Red Engine Cache.");
-            std::fs::remove_dir_all(Path::new(user_config.red_engine.as_str().unwrap()))
-                .expect("Failed to delete RE cache");
+            _ = std::fs::remove_dir_all(Path::new(user_config.red_engine.as_str().unwrap()))
         }
     });
 
@@ -43,5 +41,7 @@ fn main() {
     handle_two.join().unwrap();
     handle_three.join().unwrap();
 
-    println!("All functions completed!\n");
+    println!("\nDone!\n");
+
+    process::exit(0);
 }
