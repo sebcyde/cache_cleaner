@@ -1,13 +1,12 @@
 pub mod helpers {
+
     use dirs::config_dir;
     use serde::{Deserialize, Serialize};
-    use serde_json::Value;
-
+    use serde_json::{from_str, to_string, Value};
     use std::fs::read_to_string;
     use std::fs::File;
     use std::io::Write;
     use std::path::PathBuf;
-    use std::process;
 
     #[derive(Serialize, Deserialize, Debug, Clone)]
     pub struct ConfigInterface {
@@ -32,7 +31,7 @@ pub mod helpers {
             red_engine: Value::String(String::new()),
         };
 
-        let json_data: String = serde_json::to_string(&default_config).unwrap();
+        let json_data: String = to_string(&default_config).unwrap();
         _ = config_file.write_all(json_data.as_bytes());
 
         println!(
@@ -41,8 +40,6 @@ pub mod helpers {
         );
 
         println!("Once paths are set, try again.\n");
-
-        process::exit(0);
     }
 
     pub fn read_config() -> ConfigInterface {
@@ -59,7 +56,7 @@ pub mod helpers {
 
         let escaped_config_value = config_value.replace("\\", "\\\\");
 
-        let user_config: ConfigInterface = serde_json::from_str(&escaped_config_value).unwrap();
+        let user_config: ConfigInterface = from_str(&escaped_config_value).unwrap();
 
         return user_config;
     }

@@ -1,7 +1,6 @@
 mod helper_functions;
 
 use crate::helper_functions::helpers::{read_config, ConfigInterface};
-use std::process;
 use std::{path::Path, thread};
 
 fn main() {
@@ -42,6 +41,4 @@ fn main() {
     handle_three.join().unwrap();
 
     println!("\nDone!\n");
-
-    process::exit(0);
 }
